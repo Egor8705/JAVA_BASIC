@@ -6,15 +6,14 @@ public class Main {
 
        float x = in.nextFloat();
        float y = in.nextFloat();
-       float z = in.nextFloat();
+       String z = in.next();
 
-       double m = (x + y + z) / 3;
-       System.out.println(m);
-
-       m = Math.floor(m / 2);
-
-       if(m > 3){
-           System.out.println("Программа выполнена корректно");
+       switch (z){
+           case "+":System.out.println(x + y);break;
+           case "-":System.out.println(x - y);break;
+           case "*":System.out.println(x * y);break;
+           case "/":System.out.println(x / y);break;
+           default:break;
        }
     }
 }
