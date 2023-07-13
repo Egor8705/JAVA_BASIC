@@ -1,27 +1,32 @@
-import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
+        int min = -20;
+        int max = 20;
+        int length = 15;
+        int[] arr = new int[length];
 
-        System.out.println("Введите строку");
-        String str = in.nextLine()  ;
+        Random random = new Random();
 
-
-        String separator = "\\s+";
-        String latin = "^[A-Za-z]+";
-
-        String[] arr = str.split(separator);
-
-        int latinCounter = 0;
-        for(String word:arr){
-            boolean isLatin = word.matches(latin);
-            if(isLatin){
-                System.out.println(word);
-                latinCounter++;
-            }
+        for(int i = 0;i < length;i++){
+            int elem = random.nextInt(max - min) - Math.abs(min);
+            arr[i] = elem;
         }
 
-        System.out.println(latinCounter);
+        System.out.println(Arrays.toString(arr));
+
+        int maxEl = min;
+        int minEl = max;
+
+        for(int i = 0;i < length;i++){
+            int elem = arr[i];
+
+            maxEl = Math.max(elem, maxEl);
+            minEl = Math.min(elem, minEl);
+        }
+
+        System.out.println(Math.max(Math.abs(maxEl), Math.abs(minEl)));
     }
 }
