@@ -4,18 +4,24 @@ public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
 
-        System.out.println("Введите: I like Java!!!");
+        System.out.println("Введите строку");
         String str = in.nextLine()  ;
 
-        boolean cont = str.contains("Java");
-        boolean start = str.startsWith("I like");
-        boolean end = str.endsWith("!!!");
 
-        if(cont && start && end){
-            System.out.println(str.toUpperCase());
+        String separator = "\\s+";
+        String latin = "^[A-Za-z]+";
 
-            str = str.replaceAll("a", "o");
-            System.out.println(str.substring(str.indexOf("J"),str.indexOf("J") + 4));
+        String[] arr = str.split(separator);
+
+        int latinCounter = 0;
+        for(String word:arr){
+            boolean isLatin = word.matches(latin);
+            if(isLatin){
+                System.out.println(word);
+                latinCounter++;
+            }
         }
+
+        System.out.println(latinCounter);
     }
 }
