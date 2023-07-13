@@ -4,24 +4,14 @@ public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
 
-        System.out.println("Введите строку");
-        String str = in.nextLine()  ;
+        System.out.print("Курс доллара: ");
+        float course = in.nextFloat();
 
+        System.out.print("Количество рублей: ");
+        double rubles = in.nextDouble();
 
-        String separator = "\\s+";
-        String latin = "^[A-Za-z]+";
+        double dollars = Math.floor((rubles / course) * 100) / 100;
 
-        String[] arr = str.split(separator);
-
-        int latinCounter = 0;
-        for(String word:arr){
-            boolean isLatin = word.matches(latin);
-            if(isLatin){
-                System.out.println(word);
-                latinCounter++;
-            }
-        }
-
-        System.out.println(latinCounter);
+        System.out.printf("Итого: %.2f", dollars);
     }
 }
