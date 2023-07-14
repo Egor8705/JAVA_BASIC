@@ -1,53 +1,42 @@
 import java.util.Scanner;
 
 public class Main {
+    public static int getUniqueSymbolsCount(String str){
+        String s = str;
+
+        int i = 0;
+        while (i < s.length()){
+            char elem = s.charAt(i);
+            s = elem + s.replaceAll(String.valueOf(elem), "");
+            i++;
+        }
+
+        return s.length();
+    }
+
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
 
-        int length = 5;
+        System.out.print("Введите количество строк: ");
+        int length = in.nextInt();
 
-        System.out.print("Ввод: ");
-        String str = in.nextLine();
+        String[] strArr = new String[length];
 
-        if(str.length() != length){
-            System.out.println("Некорректное уравнение");
+        for(int i = 0;i < strArr.length;i++){
+            System.out.print("Строка " + (i + 1) + ": ");
+            strArr[i] = in.next();
         }
 
-        int num;
-        int pos;
-
-        boolean isPlusSign = str.charAt(1) == '+';
-
-        char x = str.charAt(0);
-        char y = str.charAt(2);
-        char z = str.charAt(4);
-
-        if(Character.isDigit(x) && Character.isDigit(y)){
-            int n = Character.getNumericValue(x);
-            int m = Character.getNumericValue(y);
-
-            System.out.printf("Ответ: %d", isPlusSign ? n + m : n - m);
-            return;
-        } else if(!Character.isDigit(z)){
-            System.out.println("Некорректное уравнение");
-            return;
-        } else if(Character.isDigit(x)){
-            num = Character.getNumericValue(x);
-            pos = 0;
-        } else if(Character.isDigit(y)){
-            num = Character.getNumericValue(y);
-            pos = 2;
-        } else {
-            System.out.println("Некорректное уравнение");
-            return;
+        int maxUniqueValue = 0;
+        String s = "";
+        for (String str: strArr){
+            int len = getUniqueSymbolsCount(str);
+            if(len > maxUniqueValue){
+                maxUniqueValue = len;
+                s = str;
+            }
         }
 
-        int res = Character.getNumericValue(z);
-
-        if(isPlusSign){
-            System.out.printf("Ответ: %d", res - num);
-        } else {
-            System.out.printf("Ответ: %d", pos == 0 ? num - res : num + res);
-        }
+        System.out.printf("Ответ: %s", s);
     }
 }
